@@ -1,0 +1,117 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+#root {
+  background-color: rgb(39, 39, 39);
+  color: white;
+  height: 100vh;
+  font-family:
+    "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans",
+    Arial, sans-serif;
+  font-weight: lighter;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.fuel-options {
+  display: flex;
+  gap: 25px;
+  margin: 25px;
+}
+
+.fuel-button {
+  border: 2px solid rgba(255, 255, 255, 0.093);
+  border-radius: 6px;
+  height: 8em;
+  width: 6em;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  user-select: none;
+  cursor: pointer;
+  padding: 10px 40px;
+}
+
+.fuel-button.active {
+  border: 2px solid rgb(0, 136, 255);
+}
+
+.fuel-button > img {
+  height: 100%;
+}
+
+input {
+  font-size: 14px;
+  padding: 14px;
+  text-align: center;
+  margin: 10px;
+  background-color: rgba(0, 0, 0, 0.467);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.093);
+  border-radius: 6px;
+  outline: none;
+}
+
+.text-overlay {
+  position: relative;
+  width: 200px; /* or whatever width you want */
+}
+
+.text-overlay input {
+  width: 100%;
+  padding-right: 65px; /* space for /100km */
+  box-sizing: border-box;
+}
+
+.text-overlay span {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  pointer-events: none;
+}
+
+/* Remove numruic arrows from inputs */
+/* Chrome, Safari, Edge */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.calc-button:disabled {
+  background-color: rgba(0, 0, 0, 0.163);
+  border: none;
+  border-radius: 6px;
+  padding: 14px;
+  font-size: 14px;
+  color: rgb(123, 123, 123);
+  cursor: default;
+}
+
+.calc-button {
+  background-color: rgba(0, 0, 0, 0.467);
+  border: none;
+  border-radius: 6px;
+  padding: 14px;
+  font-size: 14px;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+}
