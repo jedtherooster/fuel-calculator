@@ -18,6 +18,7 @@ function App() {
 
       console.log(lastFuelPrice);
       if (currentTime % 10 === 0 || !lastFuelPrice.current) {
+        // Gets new fuel prices every 10 minutes
         console.log("If statement ran");
         const response = await axios.get("/retrieve-fuel-data");
         lastFuelPrice.current = response.data;
