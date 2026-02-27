@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import FuelTypeButton from "./components/FuelTypeButton";
 import axios from "axios";
 import "./App.css";
@@ -10,15 +10,24 @@ function App() {
     fuelEcon: "",
   });
 
+  const lastFuelPrice = useRef(null);
+
   const handleClick = async () => {
     try {
-      const response = await axios.get("/retrieve-fuel-data");
+      const currentTime = new Date().getMinutes();
+
+      console.log(lastFuelPrice);
+      if (currentTime % 10 === 0 || !lastFuelPrice.current) {
+        console.log("If statement ran");
+        const response = await axios.get("/retrieve-fuel-data");
+        lastFuelPrice.current = response.data;
+      }
 
       const distance = Number(formData.distance);
       const fuelEcon = Number(formData.fuelEcon);
-      const fuelPrice = Number(response.data[selectedFuel]);
+      const fuelPrice = Number(lastFuelPrice.current[selectedFuel]);
 
-      if (!distance || !fuelEcon || !fuelPrice) {
+      if (isNaN(distance) || isNaN(fuelEcon) || isNaN(fuelPrice)) {
         alert("One of your values is 0 or invalid.");
         return;
       }
