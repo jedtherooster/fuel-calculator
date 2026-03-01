@@ -9,18 +9,19 @@ function App() {
     distance: "",
     fuelEcon: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const lastFuelPrice = useRef(null);
 
   const handleClick = async () => {
     try {
       const currentTime = new Date().getMinutes();
-
-      console.log(lastFuelPrice);
       if (currentTime % 10 === 0 || !lastFuelPrice.current) {
         // Gets new fuel prices every 10 minutes
         console.log("If statement ran");
+        setLoading(true);
         const response = await axios.get("/retrieve-fuel-data");
+        setLoading(false);
         lastFuelPrice.current = response.data;
       }
 
@@ -50,7 +51,8 @@ function App() {
   };
 
   return (
-    <div className="container">
+    // TODO - Add loading functionality.
+    <div className={`container ${loading ? "loading" : ""}`}>
       <div className="fuel-options">
         <FuelTypeButton
           selectedFuel={selectedFuel}
