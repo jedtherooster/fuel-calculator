@@ -5,6 +5,14 @@
   text-decoration: none;
 }
 
+Link:link,
+Link:visited,
+Link:hover,
+Link:active {
+  text-decoration: none;
+  color: inherit; /* Makes link color match surrounding text color */
+}
+
 #root {
   background-color: rgb(39, 39, 39);
   color: white;
@@ -151,4 +159,11 @@ input[type="number"] {
 h1 {
   margin: 25px;
   font-size: 48px;
+}
+
+.header {
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.467);
+  color: white;
+  height: 3rem;
 }

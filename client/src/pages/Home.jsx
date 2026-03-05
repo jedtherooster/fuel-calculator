@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import FuelTypeButton from "../components/FuelTypeButton";
+import Navbar from "../components/Navbar";
 import axios from "axios";
 import "../App.css";
 
@@ -50,54 +51,60 @@ function Home() {
   };
 
   return (
-    <div className={"container"}>
+    <>
       {loading && (
         <div className="loading-overlay">
           <div className="spinner"></div>
           <p>Fetching latest fuel prices...</p>
         </div>
       )}
-      <div className="fuel-options">
-        <FuelTypeButton
-          selectedFuel={selectedFuel}
-          setSelectedFuel={setSelectedFuel}
-        />
-      </div>
+      <Navbar></Navbar>
+      <div className={"container"}>
+        <div className="fuel-options">
+          <FuelTypeButton
+            selectedFuel={selectedFuel}
+            setSelectedFuel={setSelectedFuel}
+          />
+        </div>
 
-      <div className="fuel-econ text-overlay">
-        <input
-          type="number"
-          name="fuelEcon"
-          placeholder="Litres"
-          value={formData.fuelEcon}
-          onChange={handleChange}
-        />
-        <span>/100km</span>
-      </div>
+        <div className="fuel-econ text-overlay">
+          <input
+            type="number"
+            name="fuelEcon"
+            placeholder="Litres"
+            value={formData.fuelEcon}
+            onChange={handleChange}
+          />
+          <span>/100km</span>
+        </div>
 
-      <div className="travel-distance text-overlay">
-        <input
-          type="text"
-          name="distance"
-          placeholder="Distance"
-          value={formData.distance}
-          onChange={handleChange}
-        />
-        <span>km</span>
-      </div>
+        <div className="travel-distance text-overlay">
+          <input
+            type="text"
+            name="distance"
+            placeholder="Distance"
+            value={formData.distance}
+            onChange={handleChange}
+          />
+          <span>km</span>
+        </div>
 
-      <div className="calculate">
-        <button
-          disabled={
-            loading || !selectedFuel || !formData.distance || !formData.fuelEcon
-          }
-          onClick={handleClick}
-          className="button"
-        >
-          Calculate Cost
-        </button>
+        <div className="calculate">
+          <button
+            disabled={
+              loading ||
+              !selectedFuel ||
+              !formData.distance ||
+              !formData.fuelEcon
+            }
+            onClick={handleClick}
+            className="button"
+          >
+            Calculate Cost
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
