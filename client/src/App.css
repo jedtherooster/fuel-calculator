@@ -5,10 +5,10 @@
   text-decoration: none;
 }
 
-Link:link,
-Link:visited,
-Link:hover,
-Link:active {
+a:link,
+a:visited,
+a:hover,
+a:active {
   text-decoration: none;
   color: inherit; /* Makes link color match surrounding text color */
 }
@@ -163,7 +163,14 @@ h1 {
 
 .header {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: rgba(0, 0, 0, 0.467);
   color: white;
   height: 3rem;
+}
+
+.header .links {
+  display: flex;
+  gap: 25px;
 }

@@ -1,4 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
 import "../App.css";
 
 function TravelCosts() {
@@ -13,6 +14,7 @@ function TravelCosts() {
 
   return (
     <>
+      <Navbar></Navbar>
       <div className="container">
         <h2>It will cost you</h2>
         <h1>${fuelPrice}</h1>
