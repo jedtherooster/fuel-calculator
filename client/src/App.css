@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -167,10 +169,41 @@ h1 {
   align-items: center;
   background-color: rgba(0, 0, 0, 0.467);
   color: white;
-  height: 3rem;
+  height: 4rem;
 }
 
 .header .links {
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 25px;
+  height: 100%;
+  width: 70%;
+}
+
+.header .logo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  width: 15%;
+  user-select: none;
+}
+
+.logo p {
+  width: 100%;
+  font-family: "Bitcount Grid Double", system-ui;
+  font-weight: 300;
+  font-size: 28px;
+  /* letter-spacing: 1px; */
+  margin-left: 25px;
+  white-space: nowrap;
+}
+
+.header .account {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  width: 15%;
 }

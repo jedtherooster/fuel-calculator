@@ -4,7 +4,9 @@ function Navbar() {
   return (
     <nav>
       <div className="header">
-        <div className="logo"></div>
+        <div className="logo">
+          <p>Fuel Calculator</p>
+        </div>
         <div className="links">
           <Link to="/">Calculator</Link>
           <Link to="/fuel-prices">Fuel Prices</Link>

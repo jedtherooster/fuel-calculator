@@ -4,11 +4,6 @@ const puppeteer = require("puppeteer");
 const app = express();
 const port = 3000;
 
-app.get("/", (req, res) => {
-  res.send("<h1>Hello, World!</h1>");
-  console.log();
-});
-
 app.get("/retrieve-fuel-data", async (req, res) => {
   try {
     const browser = await puppeteer.launch({ headless: true });
