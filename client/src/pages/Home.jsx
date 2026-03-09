@@ -1,49 +1,69 @@
-import { useState, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import FuelTypeButton from "../components/FuelTypeButton";
 import Navbar from "../components/Navbar";
+import FuelPrices from "../components/FuelPrices";
 import axios from "axios";
 import "../App.css";
 
 function Home() {
   const navigate = useNavigate();
+
   const [selectedFuel, setSelectedFuel] = useState(null);
   const [formData, setFormData] = useState({
     distance: "",
     fuelEcon: "",
   });
+
   const [loading, setLoading] = useState(false);
+  const [lastFuelPrice, setLastFuelPrice] = useState(null);
 
-  const handleClick = async () => {
+  const fetchFuelPrice = async () => {
     try {
-      const currentTime = new Date().getMinutes();
-
-      setLoading(true);
-
       const response = await axios.get("/retrieve-fuel-data");
+      setLastFuelPrice(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
+  useEffect(() => {
+    fetchFuelPrice(); // run immediately
+
+    const interval = setInterval(() => {
+      fetchFuelPrice();
+    }, 600000); // 10 minutes
+
+    return () => clearInterval(interval); // cleanup
+  }, []);
+
+  const handleClick = () => {
+    try {
       const distance = Number(formData.distance);
       const fuelEcon = Number(formData.fuelEcon);
-      const fuelPrice = Number(response.data[selectedFuel]);
+      const fuelPrice = Number(lastFuelPrice[selectedFuel]);
 
       if (isNaN(distance) || isNaN(fuelEcon) || isNaN(fuelPrice)) {
-        alert("One of your values is 0 or invalid.");
+        alert("One of your values is invalid.");
         return;
       }
 
       const cost = (distance / 100) * fuelEcon * fuelPrice;
+
       navigate("/travel-costs", {
-        state: { fuelData: cost.toFixed(2), travelDistance: distance },
-      }); // redirect after success
+        state: {
+          fuelData: cost.toFixed(2),
+          travelDistance: distance,
+        },
+      });
     } catch (err) {
       console.log(err);
-    } finally {
-      setLoading(false);
     }
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
@@ -58,8 +78,12 @@ function Home() {
           <p>Fetching latest fuel prices...</p>
         </div>
       )}
-      <Navbar></Navbar>
-      <div className={"container"}>
+
+      <Navbar />
+
+      <div className="container">
+        <FuelPrices fuelPrice={lastFuelPrice} refreshPrices={fetchFuelPrice} />
+
         <div className="fuel-options">
           <FuelTypeButton
             selectedFuel={selectedFuel}
@@ -92,10 +116,10 @@ function Home() {
         <div className="calculate">
           <button
             disabled={
-              loading ||
               !selectedFuel ||
               !formData.distance ||
-              !formData.fuelEcon
+              !formData.fuelEcon ||
+              !lastFuelPrice
             }
             onClick={handleClick}
             className="button"

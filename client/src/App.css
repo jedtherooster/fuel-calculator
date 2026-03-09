@@ -207,3 +207,36 @@ h1 {
   height: 100%;
   width: 15%;
 }
+
+.price-container {
+  width: 40%;
+  height: 8em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.prices {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.fuel-price {
+  border: 2px solid rgba(255, 255, 255, 0.093);
+  padding: 10px;
+  width: 25%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.refresh-button {
+  user-select: none;
+}
+
+.refresh-button:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
