@@ -15,8 +15,11 @@ a:active {
   color: inherit; /* Makes link color match surrounding text color */
 }
 
-#root {
+body {
   background-color: rgb(39, 39, 39);
+}
+
+#root {
   color: white;
   height: 100vh;
   font-family:

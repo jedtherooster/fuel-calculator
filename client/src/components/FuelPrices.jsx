@@ -9,7 +9,7 @@ function FuelPrices({ fuelPrice, refreshPrices }) {
         {fuels.map((fuel) => (
           <div className="fuel-price" key={fuel}>
             <p>{fuel}</p>
-            <p className="price">{fuelPrice?.[fuel] ?? "--"}</p>
+            <p className="price">{fuelPrice?.[fuel] ?? "..."}</p>
           </div>
         ))}
       </div>
